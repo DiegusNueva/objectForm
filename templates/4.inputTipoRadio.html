@@ -23,13 +23,21 @@
   </form>
 
   <script>
-    function mostrarDatos() {
-      for (let i = 0; i < document.formulario.actores.length; i++) {
-        if (document.formulario.actores[i].checked) {
-          alert(document.formulario.actores[i].value);
-        }
-      }
+
+    // function mostrarDatos() {
+    //   for (let i = 0; i < document.formulario.actores.length; i++) {
+    //     if (document.formulario.actores[i].checked) {
+    //       alert(document.formulario.actores[i].value);
+    //     }
+    //   }
+    // }
+
+    const mostrarDatos = () => {
+      document.formulario.actores.forEach(actor =>
+        actor.checked ? alert(actor.value) : null
+      );
     }
+
   </script>
 
 </body>
