@@ -84,6 +84,10 @@
             margin-top: 5px;
         }
 
+        .borderError {
+            border: 5px solid red !important;
+        }
+
         /* Estilo para el mensaje de éxito */
         .success {
             color: green;
@@ -163,6 +167,7 @@
                     formulario.elements[i].value == ""
                 ) {
                     spanError.innerText = "El campo " + formulario.elements[i].name + " no puede estar en blanco.";
+                    formulario.elements[i].classList.add("borderError");
                     spanError.classList.add("error");
                     formulario.elements[i].focus();
                     return false;
@@ -268,6 +273,7 @@
                 spanError.innerText = "";
                 spanError.classList.remove("error");
                 elemento.classList.remove("error");
+                elemento.classList.remove("borderError");
             });
         }
 
