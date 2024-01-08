@@ -40,7 +40,6 @@
         }
 
         form {
-
             display: flex;
             flex-direction: column;
         }
@@ -99,12 +98,16 @@
         <form name="formulario" id="formulario" action="envioCorrecto.html" method="get">
             <label for="nombre">Nombre:</label>
             <input type="text" name="nombre" id="nombre" />
+            <span id="error1"></span>
             <label for="apellidos">Apellidos:</label>
             <input type="text" name="apellidos" id="apellidos" />
+            <span id="error2"></span>
             <label for="edad">Edad:</label>
             <input name="edad" type="text" id="edad" maxlength="3" />
+            <span id="error3"></span>
             <label for="matricula">Matrícula Coche:</label>
             <input name="matricula" type="text" id="matricula" value="XXXX AAA" />
+            <span id="error4"></span>
             <label for="provincia">Provincia:</label>
             <select name="provincia" id="provincia">
                 <option value="0" selected="selected">Seleccione Provincia</option>
@@ -112,6 +115,7 @@
                 <option value="ZA">Zaragoza</option>
                 <option value="T">Teruel</option>
             </select>
+            <span id="error5"></span>
             <label></label>
             <input type="reset" name="limpiar" id="limpiar" value="Limpiar" />
             <br>
@@ -150,31 +154,25 @@
             for (let i = 0; i < formulario.elements.length; i++) {
                 // Eliminamos la clase .error que estuviera asignada a algún campo
                 formulario.elements[i].classList.remove("error");
-
+                //Necesitamos hacer referencia a cada span en cada momento de la iteración
+                let spanError = document.getElementById("error" + (i + 1));
+                spanError.innerText = ""; // Limpiamos el mensaje de error
                 // Buscamos los que son de tipo texto
                 if (
                     formulario.elements[i].type == "text" &&
                     formulario.elements[i].value == ""
                 ) {
-                    alert(
-                        "El campo: " +
-                        formulario.elements[i].name +
-                        " no puede estar en blanco"
-                    );
-                    formulario.elements[i].classList.add("error");
+                    spanError.innerText = "El campo " + formulario.elements[i].name + " no puede estar en blanco.";
+                    spanError.classList.add("error");
                     formulario.elements[i].focus();
                     return false;
                 }
                 // Validamos también el campo 'edad'
                 else if (formulario.elements[i].id == "edad") {
                     let laEdad = formulario.elements[i].value;
-                    if (isNaN(laEdad) || laEdad < 0 || laEdad > 115) {
-                        alert(
-                            "El campo: " +
-                            formulario.elements[i].name +
-                            " posee valores incorrectos"
-                        );
-                        formulario.elements[i].classList.add("error");
+                    if (isNaN(laEdad) || laEdad <= 0 || laEdad > 115) {
+                        spanError.innerText = "El campo " + formulario.elements[i].name + " no puede estar en blanco o es inválido.";
+                        spanError.classList.add("error");
                         formulario.elements[i].focus();
                         return false;
                     }
@@ -186,10 +184,9 @@
                         document.getElementById("matricula").classList.remove("error");
                         return true;
                     } else {
-                        alert(
-                            "El campo: Matricula no está correcto.\n\nCuatro números, espacio en blanco opcional y 3 letras mayúsculas."
-                        );
+                        spanError.innerText = "El campo matrícula no está correcto.\n\nCuatro números, espacio en blanco opcional y 3 letras mayúsculas.";
                         // Situamos el foco en el campo matrícula y le asignamos la clase .error.
+                        spanError.classList.add("error");
                         document.getElementById("matricula").focus();
                         document.getElementById("matricula").classList.add("error");
                         return false;
@@ -205,8 +202,9 @@
             // Comprueba que la opción seleccionada sea diferente a 0.
             // Si es la 0 es que no ha seleccionado ningún nombre de Provincia.
             if (document.getElementById("provincia").selectedIndex == 0) {
-                alert("Atención!: Debes seleccionar una provincia.");
-
+                let spanError = document.getElementById("error5");
+                spanError.innerText = "¡Atención!\nDebes seleccionar una provincia.";
+                spanError.classList.add("error");
                 // Situamos el foco en el campo provincia y le asignamos la clase .error.
                 document.getElementById("provincia").focus();
                 document.getElementById("provincia").classList.add("error");
