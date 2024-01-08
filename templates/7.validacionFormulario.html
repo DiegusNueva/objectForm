@@ -217,6 +217,67 @@
         // Al hacer click en el botón de enviar se llama a la función 'validar',
         // que se encargará de validar el formulario.
         document.getElementById("enviar").addEventListener("click", validar, false);
+
+
+        // document.getElementById("nombre").addEventListener("change", function () {
+        //     // Limpiar el contenido del span y quitar la clase "error" al cambiar la selección
+        //     let spanError = document.getElementById("error1");
+        //     spanError.innerText = "";
+        //     spanError.classList.remove("error");
+        //     document.getElementById("nombre").classList.remove("error");
+        // });
+
+        // document.getElementById("apellidos").addEventListener("change", function () {
+        //     // Limpiar el contenido del span y quitar la clase "error" al cambiar la selección
+        //     let spanError = document.getElementById("error2");
+        //     spanError.innerText = "";
+        //     spanError.classList.remove("error");
+        //     document.getElementById("apellidos").classList.remove("error");
+        // });
+
+        // document.getElementById("matricula").addEventListener("change", function () {
+        //     // Limpiar el contenido del span y quitar la clase "error" al cambiar la selección
+        //     let spanError = document.getElementById("error3");
+        //     spanError.innerText = "";
+        //     spanError.classList.remove("error");
+        //     document.getElementById("matricula").classList.remove("error");
+        // });
+
+        // document.getElementById("edad").addEventListener("change", function () {
+        //     // Limpiar el contenido del span y quitar la clase "error" al cambiar la selección
+        //     let spanError = document.getElementById("error4");
+        //     spanError.innerText = "";
+        //     spanError.classList.remove("error");
+        //     document.getElementById("edad").classList.remove("error");
+        // });
+
+        // document.getElementById("provincia").addEventListener("change", function () {
+        //     // Limpiar el contenido del span y quitar la clase "error" al cambiar la selección
+        //     let spanError = document.getElementById("error5");
+        //     spanError.innerText = "";
+        //     spanError.classList.remove("error");
+        //     document.getElementById("provincia").classList.remove("error");
+        // });
+
+        function agregarEventoLimpieza(idElemento, idError) {
+            let elemento = document.getElementById(idElemento);
+            let spanError = document.getElementById(idError);
+
+            elemento.addEventListener("change", function () {
+                // Limpiar el contenido del span y quitar la clase "error" al cambiar la selección
+                spanError.innerText = "";
+                spanError.classList.remove("error");
+                elemento.classList.remove("error");
+            });
+        }
+
+        agregarEventoLimpieza("nombre", "error1");
+        agregarEventoLimpieza("apellidos", "error2");
+        agregarEventoLimpieza("edad", "error3");
+        agregarEventoLimpieza("matricula", "error4");
+        agregarEventoLimpieza("provincia", "error5");
+
+
     </script>
 
 </body>
