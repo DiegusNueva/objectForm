@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validación de formularios - 2</title>
+    <style>
+        #formulario {
+            max-width: 400px;
+            margin: auto;
+            font-family: Arial, sans-serif;
+        }
+
+
+        p {
+            margin-bottom: 20px;
+        }
+
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+
+        input[type="text"],
+        textarea {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+
+        #enviar {
+            background-color: #4caf50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        #enviar:hover {
+            background-color: #45a049;
+        }
+
+
+        #errores {
+            list-style-type: none;
+            padding: 0;
+            color: red;
+            font-weight: bold;
+        }
+
+        ul {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+
+    <form id="formulario" action="envioCorrecto.html" method="get">
+        <p>
+            <label>
+                Nombre
+                <input type="text" id="nombre" value="" autocomplete="off">
+            </label>
+        </p>
+        <p>
+            <label>
+                Edad
+                <input id="edad" type="text" value="" autocomplete="off">
+            </label>
+        </p>
+        <p>
+            <label>
+                Mensaje
+                <textarea cols="30" id="mensaje" name="" rows="10" autocomplete="off"></textarea>
+            </label>
+        </p>
+        <p>
+            <input type="submit" id="enviar" value="Enviar" />
+        </p>
+    </form>
+    <!-- Mensajes de error -->
+    <ul id="errores"></ul>
+
+    <script>
+        // Variables
+        const formulario = document.querySelector('#formulario');
+        const nombre = document.querySelector('#nombre');
+        const edad = document.querySelector('#edad');
+        const mensaje = document.querySelector('#mensaje');
+        const enviar = document.querySelector('#enviar');
+        const errores = document.querySelector('#errores');
+        let mensajesErrores = [];
+        // nombre.value.trim().length === 0 && mensajesErrores.push('Nombre es un campo obligatorio');
+        // !/^[a-zA-Z0-9]*$/.exec(nombre.value.trim()) && mensajesErrores.push('Nombre no tiene caracteres válidos');
+        // isNaN(edad.value.trim()) && mensajesErrores.push('La edad debe ser un número');
+        // mensaje.value.trim().length < 10 && mensajesErrores.push('Mensaje demasiado corto');
+
+        // Funciones
+        const validar = evento => {
+            // Evitar que se envie el formulario
+            evento.preventDefault();
+
+            // Vacia los mensajesErrores antes de rellenarlo nuevamente
+            mensajesErrores = [];
+
+            // VALIDACIONES
+
+            // Nombre es obligatorio
+
+            if (nombre.value.trim().length === 0) {
+                mensajesErrores = mensajesErrores.concat('Nombre es un campo obligatorio');
+            }
+
+            // Nombre carácteres válidos
+
+            if (!/^[a-zA-Z0-9]*$/.exec(nombre.value.trim())) { //  exec sirve para buscar la coincidencia en una cadena con una expresión regular
+                mensajesErrores = mensajesErrores.concat('Nombre no tiene carácteres válidos');
+            }
+
+            // Edad debe ser números
+
+            if (isNaN(edad.value.trim())) {
+                mensajesErrores = mensajesErrores.concat('La edad debe ser un número');
+            }
+
+            // Comprobamos que el mensaje tiene un mínimo de 10 carácteres
+
+            if (mensaje.value.trim().length < 10) {
+                mensajesErrores = mensajesErrores.concat('Mensaje demasiado corto');
+            }
+
+            // ENVIAR O MOSTRAR MENSAJES
+            if (mensajesErrores.length === 0 && confirm("¿Estás seguro/a de enviar el formulario?")) {
+                // Enviamos el formulario si no hay errores y el usuario confirma
+                formulario.submit();
+            } else if (mensajesErrores.length > 0) {
+                // Muestro los errores solo si hay mensajes de error
+                errores.textContent = '';
+                mensajesErrores.forEach(function (mensaje) {
+                    const miLi = document.createElement('li');
+                    miLi.textContent = mensaje;
+                    errores.appendChild(miLi);
+                });
+            }
+        }
+
+        // Eventos
+        formulario.addEventListener('submit', validar);
+
+        // Inicio
+
+    </script>
+</body>
+
+</html>
