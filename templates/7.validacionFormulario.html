@@ -159,8 +159,8 @@
                 // Eliminamos la clase .error que estuviera asignada a algún campo
                 formulario.elements[i].classList.remove("error");
                 //Necesitamos hacer referencia a cada span en cada momento de la iteración
-                let spanError = document.getElementById("error" + (i + 1));
-                spanError.innerText = ""; // Limpiamos el mensaje de error
+                let spanError = document.getElementById("error" + (i + 1)); 
+                spanError.innerText = ""; // Limpiamos el mensaje de error 
                 // Buscamos los que son de tipo texto
                 if (
                     formulario.elements[i].type == "text" &&
@@ -222,47 +222,6 @@
         // Al hacer click en el botón de enviar se llama a la función 'validar',
         // que se encargará de validar el formulario.
         document.getElementById("enviar").addEventListener("click", validar, false);
-
-
-        // document.getElementById("nombre").addEventListener("change", function () {
-        //     // Limpiar el contenido del span y quitar la clase "error" al cambiar la selección
-        //     let spanError = document.getElementById("error1");
-        //     spanError.innerText = "";
-        //     spanError.classList.remove("error");
-        //     document.getElementById("nombre").classList.remove("error");
-        // });
-
-        // document.getElementById("apellidos").addEventListener("change", function () {
-        //     // Limpiar el contenido del span y quitar la clase "error" al cambiar la selección
-        //     let spanError = document.getElementById("error2");
-        //     spanError.innerText = "";
-        //     spanError.classList.remove("error");
-        //     document.getElementById("apellidos").classList.remove("error");
-        // });
-
-        // document.getElementById("matricula").addEventListener("change", function () {
-        //     // Limpiar el contenido del span y quitar la clase "error" al cambiar la selección
-        //     let spanError = document.getElementById("error3");
-        //     spanError.innerText = "";
-        //     spanError.classList.remove("error");
-        //     document.getElementById("matricula").classList.remove("error");
-        // });
-
-        // document.getElementById("edad").addEventListener("change", function () {
-        //     // Limpiar el contenido del span y quitar la clase "error" al cambiar la selección
-        //     let spanError = document.getElementById("error4");
-        //     spanError.innerText = "";
-        //     spanError.classList.remove("error");
-        //     document.getElementById("edad").classList.remove("error");
-        // });
-
-        // document.getElementById("provincia").addEventListener("change", function () {
-        //     // Limpiar el contenido del span y quitar la clase "error" al cambiar la selección
-        //     let spanError = document.getElementById("error5");
-        //     spanError.innerText = "";
-        //     spanError.classList.remove("error");
-        //     document.getElementById("provincia").classList.remove("error");
-        // });
 
         function agregarEventoLimpieza(idElemento, idError) {
             let elemento = document.getElementById(idElemento);
